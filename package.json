@@ -1,6 +1,6 @@
 {
   "name": "blazingly-fast-is-odd",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Blazingly fast package to check if number is odd",
   "main": "index.js",
   "scripts": {
