@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blazingly-fast-is-odd</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background-color: #1e1e1e;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        nav a {
+            color: #ffffff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1686593686409-43456910d65c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHB1cnBsZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            filter: blur(8px);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        section {
+            padding: 50px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+
+        .button {
+            padding: 15px 30px;
+            background-color: #ff6b6b;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #ff3b3b;
+        }
+
+        .feature {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .feature div {
+            margin: 0 20px;
+            text-align: center;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        canvas {
+            max-width: 600px;
+            margin: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header>
+    <h1>blazingly-fast-is-odd</h1>
+    <nav>
+        <a href="#features">Features</a>
+        <a href="#performance">Performance</a>
+        <a href="#installation">Installation</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<div class="hero">
+    <div class="hero-content">
+        <h2>Introducing blazingly-fast-is-odd!</h2>
+        <p>A simple, lightweight npm package to determine if a number is odd.</p>
+        <button class="button">Install Now</button>
+    </div>
+</div>
+
+<section id="features">
+    <h2>Features</h2>
+    <div class="feature">
+        <div>
+            <i class="fas fa-bolt fa-2x"></i>
+            <h3>Blazingly Fast</h3>
+            <p>Utilizes bitwise operations for speed.</p>
+        </div>
+        <div>
+            <i class="fas fa-code fa-2x"></i>
+            <h3>Simple API</h3>
+            <p>Easy to use with minimal setup.</p>
+        </div>
+        <div>
+            <i class="fas fa-thumbs-up fa-2x"></i>
+            <h3>Lightweight</h3>
+            <p>No unnecessary dependencies.</p>
+        </div>
+    </div>
+</section>
+
+<section id="performance">
+    <h2>Performance Comparison</h2>
+    <div class="chart-container">
+        <div>
+            <h3>Average Time per Iteration (ms)</h3>
+            <canvas id="avgTimeChart" width="400" height="400"></canvas>
+        </div>
+        <div>
+            <h3>Throughput (ops/s)</h3>
+            <canvas id="throughputChart" width="400" height="400"></canvas>
+        </div>
+        <div>
+            <h3>Standard Deviation (ms)</h3>
+            <canvas id="stdDevChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+</section>
+
+<section id="installation">
+    <h2>Installation</h2>
+    <p>You can install the package using npm:</p>
+    <pre><code>npm install blazingly-fast-is-odd</code></pre>
+</section>
+
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>For contributions and suggestions, please open an issue or submit a pull request on our GitHub page.</p>
+</section>
+
+<script>
+    const avgTimeCtx = document.getElementById('avgTimeChart').getContext('2d');
+    const throughputCtx = document.getElementById('throughputChart').getContext('2d');
+    const stdDevCtx = document.getElementById('stdDevChart').getContext('2d');
+
+    // Average Time Chart
+    const avgTimeChart = new Chart(avgTimeCtx, {
+        type: 'line',
+        data: {
+            labels: ['10k', '100k', '1M', '10M'],
+            datasets: [
+                {
+                    label: 'is-odd',
+                    data: [0.000040688425799984195, 0.00004026835670004137, 0.00004052205919996145, 0.00004000025318390317],
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    fill: false,
+                },
+                {
+                    label: 'blazingly-fast-is-odd',
+                    data: [0.00003700025660003661, 0.00003609007900006214, 0.000036062019799912565, 0.00003649974799999498],
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    fill: false,
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Time (ms)',
+                    },
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Iterations',
+                    },
+                }
+            }
+        }
+    });
+
+    // Throughput Chart
+    const throughputChart = new Chart(throughputCtx, {
+        type: 'line',
+        data: {
+            labels: ['10k', '100k', '1M', '10M'],
+            datasets: [
+                {
+                    label: 'is-odd',
+                    data: [261687, 264534, 276883, 250572],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    fill: false,
+                },
+                {
+                    label: 'blazingly-fast-is-odd',
+                    data: [327177, 330182, 309076, 307100],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    fill: false,
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Throughput (ops/s)',
+                    },
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Iterations',
+                    },
+                }
+            }
+        }
+    });
+
+    // Standard Deviation Chart
+    const stdDevChart = new Chart(stdDevCtx, {
+        type: 'bar',
+        data: {
+            labels: ['is-odd', 'blazingly-fast-is-odd'],
+            datasets: [
+                {
+                    label: 'Standard Deviation',
+                    data: [0.000012, 0.000007],
+                    backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)'],
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Standard Deviation (ms)',
+                    },
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
