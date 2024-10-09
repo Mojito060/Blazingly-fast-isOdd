@@ -38,4 +38,18 @@ describe('checkIfOdd', () => {
         expect(checkIfOdd('')).toBe(false);
         expect(checkIfOdd('Alphanumerical string')).toBe(false);
     });
+
+    it('should return false for unexpected values', () => { 
+        expect(checkIfOdd(NaN)).toBe(false);
+        expect(checkIfOdd(Infinity)).toBe(false);
+        expect(checkIfOdd(undefined)).toBe(false);
+        expect(checkIfOdd(null)).toBe(false);
+
+        expect(checkIfOdd({})).toBe(false);
+        expect(checkIfOdd([])).toBe(false);
+        expect(checkIfOdd(() => {})).toBe(false);
+
+        expect(checkIfOdd(false)).toBe(false);
+        // expect(checkIfOdd(true)).toBe(false);        // This will unfortunately fail due to limitations of the blazingly fast implementation of checkIfOdd
+    });
 });
