@@ -7,7 +7,7 @@ A simple, lightweight npm package to determine if a number is odd. This package 
 You can install the package using npm:
 
 ```bash
-npm install check-if-odd
+npm install blazingly-fast-is-odd
 ```
 ## Usage
 To use the checkIfOdd function, require the package in your JavaScript code:

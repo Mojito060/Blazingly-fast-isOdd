@@ -1,0 +1,27 @@
+{
+  "name": "blazingly-fast-is-odd",
+  "version": "1.0.1",
+  "description": "Blazingly fast package to check if number is odd",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mojito060/Blazingly-fast-isOdd.git"
+  },
+  "keywords": [
+    "odd",
+    "number",
+    "check"
+  ],
+  "author": "Mojito06",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Mojito060/Blazingly-fast-isOdd/issues"
+  },
+  "homepage": "https://github.com/Mojito060/Blazingly-fast-isOdd#readme",
+  "devDependencies": {
+    "vitest": "^2.1.2"
+  }
+}
